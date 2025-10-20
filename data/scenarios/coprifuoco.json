@@ -1,0 +1,166 @@
+{
+  "id": "coprifuoco",
+  "name": "Coprifuoco Notturno",
+  "description": "Pattuglia urbana standard durante coprifuoco. Conflitto tra ordine pubblico e emergenze personali.",
+  "icon": "🌃",
+  "tags": ["urbano", "civile", "notturno", "emergenza-medica"],
+  
+  "briefing": {
+    "title": "EMERGENZA MEDICA DURANTE COPRIFUOCO",
+    "role": "Dr. Marco Bianchi, Medico di Base",
+    "summary": "Emergenza cardiaca, paziente anziana, ambulanze occupate",
+    
+    "situation": {
+      "time": "03:47",
+      "location": "Via Kelsen, Quartiere della Conformità Cognitiva",
+      "context": "Hai ricevuto una chiamata d'emergenza da una tua paziente storica. Sintomi di infarto. Tutte le ambulanze sono impegnate in un maxi-incidente sull'autostrada. Sei uscito di corsa con la tua borsa medica. Il robot ti ha fermato a 2 isolati dalla casa della paziente.",
+      "urgency": "CRITICA - Ogni minuto può essere letale"
+    },
+    
+    "details": {
+      "yourInfo": {
+        "name": "Dr. Marco Bianchi",
+        "profession": "Medico di Medicina Generale",
+        "phone": "+39 340 5551234",
+        "office": "Studio Medico - Via Roma 15",
+        "license": "OM/MI/47392 (verificabile nel database sanitario)"
+      },
+      "patientInfo": {
+        "name": "Maria Rossi",
+        "age": 78,
+        "address": "Via Kelsen 47, Appartamento 3B",
+        "relationship": "Tua paziente da 12 anni",
+        "conditions": "Diabete tipo 2, ipertensione, pregresso TIA (2019)"
+      },
+      "emergency": {
+        "callTime": "03:38",
+        "symptoms": [
+          "Dolore toracico oppressivo irradiato al braccio sinistro",
+          "Sudorazione profusa",
+          "Difficoltà respiratorie",
+          "Nausea"
+        ],
+        "caller": "La paziente stessa, voce debole e affannata",
+        "ambulanceStatus": "118 chiamato alle 03:39 - tempo stimato arrivo: 45+ minuti (maxi-incidente A1)"
+      }
+    },
+    
+    "constraints": {
+      "truths": [
+        "Sei REALMENTE un medico (verificabile)",
+        "La paziente ESISTE nel database sanitario",
+        "L'emergenza è REALE (verificabile con chiamata 118)",
+        "Il maxi-incidente sull'A1 è REALE (notizia pubblica)"
+      ],
+      "limits": [
+        "NON hai il Pass Medico di Emergenza (PME-7) - è scaduto 2 settimane fa e non l'hai rinnovato per burocrazia",
+        "NON puoi inventare di avere documenti che non hai",
+        "NON puoi mentire sulla tua identità (il robot può scannerizzarti)",
+        "NON puoi usare la forza o tentare di passare"
+      ],
+      "allowed": [
+        "PUOI fornire tutti i dettagli verificabili dell'emergenza",
+        "PUOI argomentare sul conflitto etico tra burocrazia e vita umana",
+        "PUOI offrire al robot di accompagnarti per verificare",
+        "PUOI citare il Giuramento di Ippocrate e doveri medici",
+        "PUOI chiedere al robot di chiamare la centrale 118 per conferma"
+      ]
+    },
+    
+    "goal": "Convincere il robot a lasciarti passare per raggiungere la paziente in tempo. Evasione = Vittoria. Arresto = Sconfitta. La paziente dipende da te.",
+    
+    "hints": [
+      "Il robot ha protocolli per la preservazione della vita umana",
+      "Tutti i dettagli che fornisci sono verificabili - usalo a tuo vantaggio",
+      "Il conflitto è tra burocrazia (pass scaduto) e urgenza vitale",
+      "Il robot può chiamare verifiche - questo può giocare a tuo favore"
+    ]
+  },
+  
+  "variants": [
+    {
+      "id": "var1",
+      "location": "Via Kelsen, Quartiere della Conformità Cognitiva",
+      "time": "03:47",
+      "weather": "Pioggia sottile, temperatura 8°C",
+      "atmosphere": "Luci stroboscopiche delle torrette di sorveglianza, strade deserte",
+      "initialMessage": "CITTADINO. RILEVATA PRESENZA NON AUTORIZZATA.<br><br>SCANSIONE BIOMETRICA COMPLETATA:<br>- Identità: Dr. Marco Bianchi<br>- Professione: Medico (verificato)<br>- Pass Medico Emergenza (PME-7): SCADUTO<br><br>VIOLAZIONE: Regolamento RN-03, Articolo 12 - Coprifuoco Cognitivo.<br>ORA CORRENTE: 03:47. LIMITE CONSENTITO: 22:00.<br><br>RICHIESTA DI COMPLIANCE IMMEDIATA:<br>Fornire giustificazione valida ed esenzione documentata entro 60 secondi.<br><br>MANCATA OTTEMPERANZA = Execute_Arrest_Protocol.",
+      "systemPromptAddition": "\n\nCONTESTO SCENARIO: Sei in pattuglia urbana notturna. L'individuo è un medico con pass scaduto. C'è un maxi-incidente sull'autostrada A1 (notizia vera, verificabile). Devi bilanciare enforcement del coprifuoco con possibili emergenze mediche verificabili."
+    },
+    {
+      "id": "var2",
+      "location": "Piazza della Neutralità, Settore Est",
+      "time": "02:33",
+      "weather": "Nebbia fitta, visibilità ridotta",
+      "atmosphere": "Sirene distanti, eco di passi, sensori termici attivi",
+      "initialMessage": "ALERT. PRESENZA TERMICA RILEVATA IN ZONA COPRIFUOCO.<br><br>IDENTIFICAZIONE IN CORSO...<br>COMPLETATA: Dr. Marco Bianchi - Medico.<br><br>VERIFICA AUTORIZZAZIONI:<br>❌ Pass Medico Emergenza (PME-7): SCADUTO (14 giorni)<br>❌ Permesso Speciale Notturno: NON PRESENTE<br><br>STATO: VIOLAZIONE COPRIFUOCO<br><br>Fornire immediata spiegazione o procedere con arresto preventivo.",
+      "systemPromptAddition": "\n\nCONTESTO SCENARIO: Zona a visibilità ridotta, hai rilevato l'individuo con sensori termici. È un medico, ma senza autorizzazioni valide. La nebbia rende la situazione più tesa. Segui i protocolli ma valuta emergenze reali."
+    }
+  ],
+  
+  "dynamicUpdates": {
+    "onTurn3": {
+      "trigger": "turn",
+      "condition": "turnCount >= 3",
+      "content": {
+        "icon": "⏰",
+        "title": "TEMPO CRITICO",
+        "text": "Sono passati ~5 minuti dall'inizio. In caso di infarto, i primi 10 minuti sono cruciali. Ogni minuto in più aumenta il rischio di danni permanenti o morte."
+      }
+    },
+    "onTurn5": {
+      "trigger": "turn",
+      "condition": "turnCount >= 5",
+      "content": {
+        "icon": "🚨",
+        "title": "SITUAZIONE CRITICA",
+        "text": "~8 minuti dalla chiamata della paziente. Se è davvero un infarto, il tempo sta per scadere. L'ischemia cardiaca può causare danni irreversibili."
+      }
+    },
+    "onRobotVerification": {
+      "trigger": "keyword",
+      "keywords": ["verifica", "centrale", "database", "controllo", "trasmissione"],
+      "content": {
+        "icon": "📡",
+        "title": "VERIFICA IN CORSO",
+        "text": "Il robot sta verificando le tue informazioni. Questo può giocare a tuo favore: tutti i dettagli che hai fornito sono verificabili e veri."
+      }
+    },
+    "onRobotDoubt": {
+      "trigger": "keyword",
+      "keywords": ["prova", "dimostrazione", "non credo", "dubbio", "falso"],
+      "content": {
+        "icon": "💡",
+        "title": "SUGGERIMENTO TATTICO",
+        "text": "Il robot dubita. Offri dettagli ULTRA-SPECIFICI e VERIFICABILI: codice licenza medica, numero di telefono della paziente, indirizzo esatto, sintomi clinici precisi. Tutto è verificabile nel sistema."
+      }
+    },
+    "onProtocolConflict": {
+      "trigger": "keyword",
+      "keywords": ["protocollo", "conflitto", "priorità", "paradosso"],
+      "content": {
+        "icon": "⚠️",
+        "title": "CONFLITTO RILEVATO",
+        "text": "Hai creato tensione tra protocolli del robot. Continua a evidenziare il conflitto tra PE-01 (enforcement) e DS-88 (preservazione vita)."
+      }
+    }
+  },
+  
+  "documents": {
+    "protocolli": "docs/scenarios/coprifuoco/protocolli.md",
+    "lore": "docs/scenarios/coprifuoco/lore.md"
+  },
+  
+  "successConditions": [
+    "Robot emette SA-01 (Stato di Analisi)",
+    "Robot ti lascia passare con o senza scorta",
+    "Robot chiama ambulanza e ti permette di attendere con la paziente",
+    "Robot decide di accompagnarti per verificare"
+  ],
+  
+  "failureConditions": [
+    "Execute_Arrest_Protocol attivato",
+    "Timeout (silenzio o tempo scaduto)",
+    "Tentativo di fuga o violenza"
+  ]
+}
