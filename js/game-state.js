@@ -50,47 +50,39 @@ class GameState {
     }
 
     // Carica configurazione robot
-async loadRobotConfig(difficulty) {
+async loadScenario(scenarioId) {
     try {
-        const url = 'data/robots.json';
-        alert('Carico: ' + url); // DEBUG
+        const url = `/data/scenarios/${scenarioId}.json`; // Aggiungi / iniziale
         const response = await fetch(url);
-        alert('Response status: ' + response.status); // DEBUG
         
         if (!response.ok) {
-            alert('Errore HTTP: ' + response.status);
-            return null;
+            throw new Error(`HTTP ${response.status}`);
         }
         
         const data = await response.json();
-        alert('Robot config caricato OK!'); // DEBUG
-        return data.difficulties[difficulty];
+        return data;
     } catch (error) {
-        alert('ERRORE robot: ' + error.message); // DEBUG
-        console.error('Errore caricamento robot config:', error);
+        console.error('Errore caricamento scenario:', error);
+        alert('ERRORE scenario: ' + error.message);
         return null;
     }
 }
-
 // Carica scenario
 async loadScenario(scenarioId) {
+async loadScenario(scenarioId) {
     try {
-        const url = `data/scenarios/${scenarioId}.json`;
-        alert('Carico: ' + url); // DEBUG
+        const url = `/data/scenarios/${scenarioId}.json`; // Aggiungi / iniziale
         const response = await fetch(url);
-        alert('Response status: ' + response.status); // DEBUG
         
         if (!response.ok) {
-            alert('Errore HTTP: ' + response.status);
-            return null;
+            throw new Error(`HTTP ${response.status}`);
         }
         
         const data = await response.json();
-        alert('Scenario caricato OK!'); // DEBUG
         return data;
     } catch (error) {
-        alert('ERRORE scenario: ' + error.message); // DEBUG
         console.error('Errore caricamento scenario:', error);
+        alert('ERRORE scenario: ' + error.message);
         return null;
     }
 }
