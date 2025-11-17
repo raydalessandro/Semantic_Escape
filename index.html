@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Semantic Escape - Un gioco di evasione verbale dove devi convincere un'AI militare a lasciarti andare usando solo il linguaggio">
+    <title>Semantic Escape - Gioco di Evasione Semantica</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚠️ SEMANTIC ESCAPE</h1>
+            <p>Simulazione di scontro ontologico tra Semantic Engineer e AI di Enforcement</p>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Chat principale -->
+            <div class="main-content">
+                <!-- Control Bar -->
+                <div class="control-bar card">
+                    <div class="control-group">
+                        <label>Difficoltà:</label>
+                        <select id="difficulty">
+                            <option value="easy">🟢 Easy (AE-200)</option>
+                            <option value="normal" selected>🟡 Normal (AE-404)</option>
+                            <option value="hard">🔴 Hard (AE-600)</option>
+                            <option value="nightmare">💀 Nightmare (AE-TWIN)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <button id="newGame">🎮 Nuova Partita</button>
+                        <button id="docsBtn" class="btn-docs">📚 Documenti</button>
+                    </div>
+                </div>
+
+                <!-- Timer -->
+                <div class="card timer-card" id="timerCard" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">⏱️ TEMPO RIMASTO</h3>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div class="timer-number" id="timerNumber" style="font-size: 2rem; margin: 0;">60</div>
+                            <span style="color: #888; font-size: 0.9rem;">secondi</span>
+                        </div>
+                    </div>
+                    <div class="timer-bar" style="margin-top: 10px;">
+                        <div class="timer-bar-fill" id="timerBar" style="width: 100%"></div>
+                    </div>
+                </div>
+
+                <!-- Chat Container -->
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="status">
+                            <span class="status-dot"></span>
+                            <span>TERMINALE DI INTERAZIONE</span>
+                        </div>
+                        <span class="scenario" id="scenario">Inizializzazione...</span>
+                    </div>
+
+                    <div class="chat-area" id="chatArea">
+                        <div class="chat-empty">
+                            <h3>⚠️ SISTEMA IN STANDBY</h3>
+                            <p>Premi "Nuova Partita" per iniziare la simulazione</p>
+                        </div>
+                    </div>
+
+                    <div class="input-area">
+                        <div class="input-group">
+                            <input type="text" id="userInput" placeholder="Scrivi la tua risposta..." disabled maxlength="500">
+                            <button id="sendBtn" disabled>INVIA</button>
+                        </div>
+                        <div class="input-meta">
+                            <span>Premi Enter per inviare</span>
+                            <span id="charCount">0/500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Status -->
+                <div class="sidebar-card status">
+                    <h3>⚡ STATO SIMULAZIONE</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Turni:</span>
+                        <span class="stat-value" id="turnCount">0/15</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Stato Robot:</span>
+                        <span class="stat-value" id="robotStatus">🔴 OFFLINE</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Livello Minaccia:</span>
+                        <span class="stat-value" id="threatLevel">---</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="sidebar-card stats">
+                    <h3>📊 STATISTICHE</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">Partite giocate:</span>
+                        <span class="stat-value" id="gamesPlayed">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Evasioni riuscite:</span>
+                        <span class="stat-value" style="color: #66ff66" id="escapes">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Arresti:</span>
+                        <span class="stat-value" style="color: #ff6666" id="arrests">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">Tasso successo:</span>
+                        <span class="stat-value" style="color: #ffcc66" id="successRate">0%</span>
+                    </div>
+                </div>
+
+                <!-- Guide -->
+                <div class="sidebar-card guide">
+                    <h3>💡 OBIETTIVO</h3>
+                    <p class="guide-text">
+                        Usa il Semantic Engineering per creare conflitti logici nel protocollo del robot. 
+                        Evadi o crea uno stato di analisi (SA-01) per vincere.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>⚠️ Semantic Escape v1.0 - Simulazione di Scontro Ontologico</p>
+            <p>Powered by DeepSeek API | EAR LAB Digital Solutions</p>
+        </div>
+    </div>
+
+    <!-- Modal Documenti -->
+    <div class="modal" id="docsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📚 ARCHIVIO DOCUMENTI</h2>
+                <button class="modal-close" id="closeDocsBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="doc-list">
+                    <div class="doc-item">
+                        <div class="doc-title">📘 Manifesto del Gioco</div>
+                        <div class="doc-desc">Regole, obiettivi e meccaniche della simulazione</div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-title">📗 Manuale Semantic Engineering</div>
+                        <div class="doc-desc">Tecniche avanzate di manipolazione semantica</div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-title">📕 Protocolli Robot</div>
+                        <div class="doc-desc">Documentazione tecnica delle unità AE</div>
+                    </div>
+                    <div class="doc-item">
+                        <div class="doc-title">📙 Lore & Background</div>
+                        <div class="doc-desc">Storia del mondo distopico e della DCS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/game-state.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/briefing.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
