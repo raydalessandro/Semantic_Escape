@@ -5,9 +5,9 @@
 const CONFIG = {
     // API Configuration
     api: {
-        url: 'https://api.anthropic.com/v1/messages',
-        model: 'claude-sonnet-4-20250514',
-        maxTokens: 1024
+        url: '/api/chat', // Endpoint Vercel serverless
+        model: 'deepseek-chat',
+        maxTokens: 2048
     },
 
     // Timer Configuration
