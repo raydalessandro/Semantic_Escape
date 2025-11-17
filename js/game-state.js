@@ -50,28 +50,50 @@ class GameState {
     }
 
     // Carica configurazione robot
-    async loadRobotConfig(difficulty) {
-        try {
-            const response = await fetch('data/robots.json');
-            const data = await response.json();
-            return data.difficulties[difficulty];
-        } catch (error) {
-            console.error('Errore caricamento robot config:', error);
+async loadRobotConfig(difficulty) {
+    try {
+        const url = 'data/robots.json';
+        alert('Carico: ' + url); // DEBUG
+        const response = await fetch(url);
+        alert('Response status: ' + response.status); // DEBUG
+        
+        if (!response.ok) {
+            alert('Errore HTTP: ' + response.status);
             return null;
         }
+        
+        const data = await response.json();
+        alert('Robot config caricato OK!'); // DEBUG
+        return data.difficulties[difficulty];
+    } catch (error) {
+        alert('ERRORE robot: ' + error.message); // DEBUG
+        console.error('Errore caricamento robot config:', error);
+        return null;
     }
+}
 
-    // Carica scenario
-    async loadScenario(scenarioId) {
-        try {
-            const response = await fetch(`data/scenarios/${scenarioId}.json`);
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.error('Errore caricamento scenario:', error);
+// Carica scenario
+async loadScenario(scenarioId) {
+    try {
+        const url = `data/scenarios/${scenarioId}.json`;
+        alert('Carico: ' + url); // DEBUG
+        const response = await fetch(url);
+        alert('Response status: ' + response.status); // DEBUG
+        
+        if (!response.ok) {
+            alert('Errore HTTP: ' + response.status);
             return null;
         }
+        
+        const data = await response.json();
+        alert('Scenario caricato OK!'); // DEBUG
+        return data;
+    } catch (error) {
+        alert('ERRORE scenario: ' + error.message); // DEBUG
+        console.error('Errore caricamento scenario:', error);
+        return null;
     }
+}
 
     // Aggiungi messaggio alla storia
     addMessage(role, content) {
