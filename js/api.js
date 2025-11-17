@@ -7,7 +7,7 @@ class APIManager {
         this.gameState = gameState;
     }
 
-    // Chiama API Claude
+    // Chiama API DeepSeek tramite endpoint Vercel
     async callClaude(userMessage) {
         try {
             // Aggiungi messaggio utente alla storia
@@ -20,18 +20,25 @@ class APIManager {
                 },
                 body: JSON.stringify({
                     model: CONFIG.api.model,
+                    messages: [
+                        {
+                            role: 'system',
+                            content: this.gameState.getSystemPrompt()
+                        },
+                        ...this.gameState.conversationHistory
+                    ],
                     max_tokens: CONFIG.api.maxTokens,
-                    system: this.gameState.getSystemPrompt(),
-                    messages: this.gameState.conversationHistory
+                    temperature: 0.7
                 })
             });
 
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status}`);
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || `API Error: ${response.status}`);
             }
 
             const data = await response.json();
-            const assistantMessage = data.content[0].text;
+            const assistantMessage = data.message || data.content || 'Errore: risposta vuota';
 
             // Aggiungi risposta assistant alla storia
             this.gameState.addMessage('assistant', assistantMessage);
